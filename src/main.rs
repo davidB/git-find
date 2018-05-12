@@ -6,6 +6,7 @@ extern crate slog_term;
 
 use git_find::*;
 use slog::Drain;
+use std::env;
 
 fn init_log() -> slog::Logger {
     let drain = slog_term::TermDecorator::new().build();
@@ -19,10 +20,10 @@ fn init_log() -> slog::Logger {
 fn main() {
     let log = init_log();
 
-    let root = ".";
+    let root = env::current_dir().unwrap();
     let tmpl = "{{.}}";
     let ctx = Ctx { logger: log };
-    find_repos(&ctx, root)
+    find_repos(&ctx, &root)
         .iter()
         .map(|r| render(&ctx, tmpl, r))
         .for_each(|s| println!("{}", s));
