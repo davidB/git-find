@@ -1,0 +1,6 @@
+[package]
+name = "git-find"
+version = "0.1.0"
+authors = ["David Bernard <david.bernard.31@gmail.com>"]
+
+[dependencies]
