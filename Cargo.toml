@@ -10,13 +10,14 @@ repository = "https://github.com/davidB/git-find"
 homepage = "https://github.com/davidB/git-find"
 
 [dependencies]
-slog = "^2.2"
+slog = { version= "^2.2", features = ["max_level_trace", "release_max_level_warn"] }
 slog-async = "^2.3"
 slog-term = "^2.4"
 walkdir = "2"
 gtmpl = "^0.5"
 gtmpl_derive = "^0.3"
 gtmpl_value= "^0.3"
+structopt = "0.2"
 
 [[bin]]
 name = "git-find"

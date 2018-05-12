@@ -14,8 +14,25 @@ Because I need a tool to list and to reorg my local git repositories.
 ## Usage Cli
 
 ```sh
-cd my_projects
-git-find
+$> git-find -h
+
+git-find 0.2.0
+davidB
+A tool (cli & lib) to find local git repositories.
+
+USAGE:
+    git-find [FLAGS] [OPTIONS] [DIR]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+    -v, --verbose    Verbose mode (-v, -vv, -vvv, etc.) print on stderr
+
+OPTIONS:
+    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }}    {{ .path.full }}]
+
+ARGS:
+    <DIR>    root directory of the search [default: .]
 ```
 
 ## Install
