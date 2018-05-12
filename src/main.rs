@@ -21,7 +21,7 @@ fn main() {
     let log = init_log();
 
     let root = env::current_dir().unwrap();
-    let tmpl = "{{.}}";
+    let tmpl = "{{ .path.file_name }}\t{{ .path.full }}";
     let ctx = Ctx { logger: log };
     find_repos(&ctx, &root)
         .iter()

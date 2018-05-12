@@ -10,6 +10,11 @@ Because I need a tool to list and to reorg my local git repositories.
 
 ## Usage Cli
 
+```sh
+cd my_projects
+git-find
+```
+
 ## Install
 
 ## Related and similar
@@ -29,3 +34,7 @@ But not the same features, else no need to re-do.
 * [mu-repo](http://fabioz.github.io/mu-repo/), Tool to help working with multiple git repositories (short for Multiple Repositories).
 * [mr](http://myrepos.branchable.com/) which is a tool to manage all your version control repositories.
 * [Repo command reference  |  Android Open Source Project](https://source.android.com/setup/develop/repo)
+
+## TODO
+
+* find a rust template engine that support calling method (getter) on current field (or contribute to gtmpl as it's a feature of go template)

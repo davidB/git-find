@@ -1,7 +1,13 @@
 #[macro_use]
 pub extern crate slog;
+#[macro_use]
+extern crate gtmpl;
+#[macro_use]
+extern crate gtmpl_derive;
+extern crate gtmpl_value;
 extern crate walkdir;
 
+use gtmpl::Value;
 use std::path::Path;
 use walkdir::DirEntry;
 use walkdir::WalkDir;
@@ -10,9 +16,15 @@ pub struct Ctx {
     pub logger: slog::Logger,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Gtmpl)]
 pub struct GitRepo {
-    dir: DirEntry,
+    path: Location,
+}
+
+#[derive(Debug, Clone, Gtmpl)]
+pub struct Location {
+    full: String,
+    file_name: String,
 }
 
 pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
@@ -35,7 +47,12 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
             continue;
         }
         if is_gitrepo(&entry) {
-            found.push(GitRepo { dir: entry.clone() });
+            found.push(GitRepo {
+                path: Location {
+                    full: entry.path().to_str().map(|x| x.to_owned()).unwrap(),
+                    file_name: entry.file_name().to_str().map(|x| x.to_owned()).unwrap(),
+                },
+            });
             it.skip_current_dir();
             continue;
         }
@@ -45,7 +62,8 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
 }
 
 pub fn render(ctx: &Ctx, tmpl: &str, value: &GitRepo) -> String {
-    format!("{:?}", value)
+    //TODO remove the clone() and provide Value for &GitRepo
+    gtmpl::template(tmpl, value.clone()).expect("template")
 }
 
 fn is_hidden(entry: &DirEntry) -> bool {
