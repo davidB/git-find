@@ -1,5 +1,7 @@
 # git-find
 
+[![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
+
 A tool (cli & lib) to find local git repositories.
 
 ## Why
