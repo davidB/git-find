@@ -7,11 +7,4 @@ matrix:
   allow_failures:
     - rust: nightly
   fast_finish: true
-  include:
-    - rust: stable
-        env: RUSTFMT
-        install:
-          - rustup component add rustfmt-preview
-        script:
-          - cargo fmt -- --write-mode=diff
 cache: cargo
