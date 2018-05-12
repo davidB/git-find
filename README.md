@@ -17,7 +17,7 @@ But not the same features, else no need to re-do.
 
 ### Informations
 
-* [peap/git-global: Keep track of all your git repositories.](https://github.com/peap/git-global) (I see if I could contribute to it to add features, but my changes is too many modifications and could change the goal usage of the tool)
+* [peap/git-global: Keep track of all your git repositories.](https://github.com/peap/git-global) (I quickly look at the source to estimate my contribution to add features, but the "potentials" changes are too many and could change the goal usage of the tool)
 * [totten/git-scan: CLI tool for scanning/updating git repos](https://github.com/totten/git-scan/)
 * [fboender/multi-git-status: Show uncommitted, untracked and unpushed changes for multiple Git repos](https://github.com/fboender/multi-git-status)
 
