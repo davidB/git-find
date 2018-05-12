@@ -1,6 +1,6 @@
 # git-find
 
-[![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/) [![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
 
 A tool (cli & lib) to find local git repositories.
 
@@ -38,3 +38,5 @@ But not the same features, else no need to re-do.
 ## TODO
 
 * find a rust template engine that support calling method (getter) on current field (or contribute to gtmpl as it's a feature of go template)
+* internally use stream / queue instead of Vector
+* optimize
