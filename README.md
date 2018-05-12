@@ -1,6 +1,9 @@
 # git-find
 
-[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/) [![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
+[![Crates.io](https://img.shields.io/crates/v/git-find.svg)](https://crates.io/crates/git-find)
+[![Documentation](https://docs.rs/git-find/badge.svg)](https://docs.rs/git-find/)
 
 A tool (cli & lib) to find local git repositories.
 
