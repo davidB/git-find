@@ -1,13 +1,11 @@
 #[macro_use]
 pub extern crate slog;
-#[macro_use]
 extern crate gtmpl;
 #[macro_use]
 extern crate gtmpl_derive;
 extern crate gtmpl_value;
 extern crate walkdir;
 
-use gtmpl::Value;
 use std::path::Path;
 use walkdir::DirEntry;
 use walkdir::WalkDir;
