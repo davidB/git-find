@@ -22,7 +22,10 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
     loop {
         let entry = match it.next() {
             None => break,
-            Some(Err(err)) => panic!("ERROR: {}", err),
+            Some(Err(err)) => {
+                warn!(ctx.logger, "fail to access"; "err" => format!("{:?}", err));
+                continue;
+            }
             Some(Ok(entry)) => entry,
         };
         if is_hidden(&entry) {
@@ -34,7 +37,7 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
         if is_gitrepo(&entry) {
             found.push(GitRepo { dir: entry.clone() });
             it.skip_current_dir();
-            //continue;
+            continue;
         }
         //println!("{}", &entry.path().display());
     }
@@ -54,6 +57,8 @@ fn is_hidden(entry: &DirEntry) -> bool {
 }
 
 fn is_gitrepo(entry: &DirEntry) -> bool {
-    let p = entry.path().join(".git");
-    p.exists() && p.is_dir()
+    entry.path().is_dir() && {
+        let p = entry.path().join(".git");
+        p.exists() && p.is_dir()
+    }
 }
