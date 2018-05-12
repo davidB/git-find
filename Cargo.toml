@@ -19,5 +19,6 @@ gtmpl_derive = "^0.3"
 gtmpl_value= "^0.3"
 
 [[bin]]
-name = "main"
+name = "git-find"
+path = "src/main.rs"
 doc = false
