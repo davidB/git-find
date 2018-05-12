@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["David Bernard <david.bernard.31@gmail.com>"]
 
 [dependencies]
+slog = "^2.2"
+slog-async = "^2.3"
+slog-term = "^2.4"
 
 [[bin]]
 name = "main"
