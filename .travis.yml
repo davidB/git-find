@@ -13,6 +13,7 @@ matrix:
 cache: cargo
 
 before_deploy:
+  - cargo build --release
   - tar -czvf  "git-find_${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz" target/release/git-find
 deploy:
   provider: releases
