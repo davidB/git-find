@@ -96,6 +96,26 @@ The template format is a subset of [golang text/template](https://golang.org/pkg
 cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git fetch
 ```
 
+* to create a sh script to move git repository under $HOME/src (same layout as go workspace)
+
+```tmpl
+echo "\n\n---------------------------------------------\n"
+PRJ_SRC={{ .path.full }}
+{{with .remotes.origin}}
+PRJ_DST=$HOME/src/{{ .url_host }}/{{ .url_path}}
+if [ ! -d $PRJ_DST ] ; then
+  read -p "move $PRJ_SRC to $PRJ_DST ?" answer
+  case $answer in
+    [yY]* )
+        mkdir -p $(dirname $PRJ_DST)
+        mv $PRJ_SRC $PRJ_DST
+        ;;
+    * ) ;;
+  esac
+fi
+{{end}}
+```
+
 ## <a name='Install'></a>Install
 
 ### <a name='Viarusttoolchain'></a>Via rust toolchain
