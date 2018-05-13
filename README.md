@@ -53,9 +53,48 @@ ARGS:
 ```
 
 * broadcast `git status` to every repositories
+
 ```sh
 git find -t 'cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git status' | sh
 ````
+
+### Template format
+
+The template format is a subset of [golang text/template](https://golang.org/pkg/text/template/).
+
+### Possibles values
+
+*!! Experimental: values could change with future release !!*
+
+* .path
+  * .file_name
+  * .full
+* .remotes
+  * .<name_of_remote> : eg 'origin'
+    * .name
+    * .url_full
+    * .url_host
+    * .url_path
+
+#### Samples
+
+* to list local repository
+
+```tmpl
+{{ .path.file_name }}\t{{ .path.full }}
+```
+
+* to list local repository with origin url
+
+```tmpl
+{{ .path.file_name }}\t{{ .path.full }}\t{{with .remotes.origin}} {{ .name }} {{.url_full}} {{.url_host}} {{.url_path}} {{end}}
+````
+
+* to create a sh script to "git fetch" on every repository
+
+```tmpl
+cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git fetch
+```
 
 ## <a name='Install'></a>Install
 
