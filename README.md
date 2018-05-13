@@ -10,6 +10,9 @@ A tool (cli & lib) to find local git repositories.
 <!-- vscode-markdown-toc -->
 * [Why](#Why)
 * [Usage Cli](#UsageCli)
+	* [Template format](#Templateformat)
+	* [Possibles values](#Possiblesvalues)
+		* [Samples](#Samples)
 * [Install](#Install)
 	* [Via rust toolchain](#Viarusttoolchain)
 	* [Via pre-build binaries](#Viapre-buildbinaries)
@@ -31,9 +34,8 @@ Because I need a tool to list and to reorg my local git repositories.
 ## <a name='UsageCli'></a>Usage Cli
 
 ```sh
-$> git-find -h
-
-git-find 0.2.0
+$> git find -h
+git-find 0.3.0
 davidB
 A tool (cli & lib) to find local git repositories.
 
@@ -46,7 +48,8 @@ FLAGS:
     -v, --verbose    Verbose mode (-v, -vv, -vvv, etc.) print on stderr
 
 OPTIONS:
-    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }}    {{ .path.full }}]
+    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }}	{{ .path.full }}
+                           {{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}]
 
 ARGS:
     <DIR>    root directory of the search [default: .]
@@ -58,11 +61,11 @@ ARGS:
 git find -t 'cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git status' | sh
 ````
 
-### Template format
+### <a name='Templateformat'></a>Template format
 
 The template format is a subset of [golang text/template](https://golang.org/pkg/text/template/).
 
-### Possibles values
+#### <a name='Possiblesvalues'></a>Possibles values
 
 *!! Experimental: values could change with future release !!*
 
@@ -76,7 +79,7 @@ The template format is a subset of [golang text/template](https://golang.org/pkg
     * .url_host
     * .url_path
 
-#### Samples
+#### <a name='Samples'></a>Samples
 
 * to list local repository
 
