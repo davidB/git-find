@@ -25,7 +25,9 @@ struct Cmd {
     /// format of the output
     /// print on stdout
     #[structopt(
-        short = "t", long = "tmpl", default_value = "{{ .path.file_name }}\t{{ .path.full }}"
+        short = "t",
+        long = "tmpl",
+        default_value = "{{ .path.file_name }}\t{{ .path.full }}\t{{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}"
     )]
     format: String,
 
