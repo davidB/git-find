@@ -35,7 +35,16 @@ ARGS:
     <DIR>    root directory of the search [default: .]
 ```
 
+* broadcast `git status` to every repositories
+```sh
+git find -t 'cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git status' | sh
+````
+
 ## Install
+
+```sh
+cargo install git-find
+```
 
 ## Related and similar
 
@@ -59,4 +68,5 @@ But not the same features, else no need to re-do.
 
 * find a rust template engine that support calling method (getter) on current field (or contribute to gtmpl as it's a feature of go template)
 * internally use stream / queue instead of Vector
+* build linux binary with musl (see https://github.com/emk/rust-musl-builder)
 * optimize

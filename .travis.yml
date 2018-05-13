@@ -1,4 +1,7 @@
 language: rust
+os:
+  - linux
+  - osx
 rust:
   - stable
 #  - beta
@@ -8,3 +11,17 @@ matrix:
     - rust: nightly
   fast_finish: true
 cache: cargo
+
+before_deploy:
+  - tar -czvf  "git-find_${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz" target/release/git-find
+deploy:
+  provider: releases
+  api_key:
+    secure: odP2tfVCssKU9BnAbHoCuh6wEF3XoCZeqeg3hJ6El58Y2GrtkOpLWJy3zSlGa/J13z3Dpk7TMkaM3qisegrfzYLM85UTQyxoGpWgfVu5YP3GU1XkPHNTmqUgjJgsI32bEXbaFaxUbC/8PoJaZPxo3vdwVWdQcdXUKEfqFd/fh2NQh7Uc5+SQft1p1JuEnZbD9dQ2VNnbfozDfv7FxBqGOYkPyOOVCZeGN1Sjjn/OQy6iEYso180zl5dN+o823r4YxNPASq/ZrVeB7Da3laBpqXpY0wmaWWDRuqBHSzMF3QXQVcOZPUcJhN/sfUJB3MWCDZBiVzXXXmRQEJgFf8QMaWMkFZy5YcfJFO+LNcZYLq7TcJN1h9LrlyOgfRJ4gozXnRgG16ZnussC8f/QEIXohdyXrP1fWX6uxJw2qHXeG8sbVmIcD6AJeETeYY1nh/NTTSxLv8uXUN6mPJEXwr292y01UdBNjQh6b44c/0oKyWDkaQ38fkWcmVd4DIuiSx1YoGpekxMqXRICjCxxyiBL82m/rp8N4XmTgCSNtn3DBvJ9eJ41SgdGxTbTyJSEXkhpolJEHix+uNHxp94ZxOm4aR3GTQ7UlHH82D8kR0qNpkkTJZhHrcS2ALjSqDufoxVCYhKaDhqlk2HAYnSK87LaBU8EuBtoLKgha2KxV1QLpOs=
+  file_glob: true
+  file: "git-find_${TRAVIS_TAG}-${TRAVIS_OS_NAME}.*"
+  skip_cleanup: true
+  on:
+    rust: stable
+    tags: true
+    repo: davidB/git-find
