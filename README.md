@@ -11,7 +11,7 @@ A tool (cli & lib) to find local git repositories.
 * [Why](#Why)
 * [Usage Cli](#UsageCli)
 	* [Template format](#Templateformat)
-	* [Possibles values](#Possiblesvalues)
+		* [Possibles values](#Possiblesvalues)
 		* [Samples](#Samples)
 * [Install](#Install)
 	* [Via rust toolchain](#Viarusttoolchain)
