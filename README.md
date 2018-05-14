@@ -2,6 +2,7 @@
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 [![Build Status](https://travis-ci.org/davidB/git-find.svg?branch=master)](https://travis-ci.org/davidB/git-find)
+[![Build status](https://ci.appveyor.com/api/projects/status/03ok7d1x3h0i5kay?svg=true)](https://ci.appveyor.com/project/davidB/git-find)
 [![Crates.io](https://img.shields.io/crates/v/git-find.svg)](https://crates.io/crates/git-find)
 [![Documentation](https://docs.rs/git-find/badge.svg)](https://docs.rs/git-find/)
 
@@ -14,8 +15,9 @@ A tool (cli & lib) to find local git repositories.
 		* [Possibles values](#Possiblesvalues)
 		* [Samples](#Samples)
 * [Install](#Install)
-	* [Via rust toolchain](#Viarusttoolchain)
-	* [Via pre-build binaries](#Viapre-buildbinaries)
+	* [From cargo](#Fromcargo)
+	* [From binaries](#Frombinaries)
+	* [From source](#Fromsource)
 * [Related and similar](#Relatedandsimilar)
 	* [Informations](#Informations)
 	* [Actions (broadcast)](#Actionsbroadcast)
@@ -35,7 +37,7 @@ Because I need a tool to list and to reorg my local git repositories.
 
 ```sh
 $> git find -h
-git-find 0.3.0
+git-find 0.3.2
 davidB
 A tool (cli & lib) to find local git repositories.
 
@@ -48,7 +50,7 @@ FLAGS:
     -v, --verbose    Verbose mode (-v, -vv, -vvv, etc.) print on stderr
 
 OPTIONS:
-    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }}	{{ .path.full }}
+    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }} {{ .path.full }}
                            {{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}]
 
 ARGS:
@@ -121,24 +123,46 @@ fi
 
 ## <a name='Install'></a>Install
 
-### <a name='Viarusttoolchain'></a>Via rust toolchain
+### <a name='Fromcargo'></a>From cargo
+
+With Rust's package manager [cargo](https://github.com/rust-lang/cargo), you can install via:
 
 ```sh
 cargo install git-find
 ```
 
-### <a name='Viapre-buildbinaries'></a>Via pre-build binaries
+Note that rust version *1.26.0* or later is required.
+
+### <a name='Frombinaries'></a>From binaries
 
 *!! Experimental !!*
 
-* download archives for your OS from https://github.com/davidB/git-find/releases
+The [release page](https://github.com/sharkdp/git-find/releases) includes precompiled binaries for Linux, macOS and Windows.
+
+* download archives for your OS
 * unarchive it, and move the executable into the PATH
 
 ```sh
-tar -xzvf git-find_0.2.2-linux.tar.gz
+tar -xzvf git-find_0.3.2-x86_64-unknown-linux-gnu.tar.gz
 chmod a+x git-find
 mv git-find $HOME/bin
 rm git-find_0.2.2-linux.tar.gz
+```
+
+### <a name='Fromsource'></a>From source
+
+```sh
+git clone https://github.com/davidB/git-find
+
+# Build
+cd git-find
+cargo build
+
+# Run unit tests and integration tests
+cargo test
+
+# Install
+cargo install
 ```
 
 ## <a name='Relatedandsimilar'></a>Related and similar
