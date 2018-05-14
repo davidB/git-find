@@ -148,8 +148,8 @@ fn is_hidden(entry: &DirEntry) -> bool {
 
 fn is_gitrepo(entry: &DirEntry) -> bool {
     entry.path().is_dir() && {
-        let p = entry.path().join(".git");
-        p.exists() && p.is_dir()
+        let p = entry.path().join(".git").join("config");
+        p.exists() && p.is_file()
     }
 }
 
