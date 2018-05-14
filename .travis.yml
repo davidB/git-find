@@ -10,15 +10,15 @@ matrix:
     - os: linux
       rust: stable
       env: TARGET=x86_64-unknown-linux-gnu
-    - os: linux
-      rust: stable
-      env: TARGET=x86_64-unknown-linux-musl
+    # - os: linux
+    #   rust: stable
+    #   env: TARGET=x86_64-unknown-linux-musl
     - os: linux
       rust: stable
       env: TARGET=i686-unknown-linux-gnu
-    - os: linux
-      rust: stable
-      env: TARGET=i686-unknown-linux-musl
+    # - os: linux
+    #   rust: stable
+    #   env: TARGET=i686-unknown-linux-musl
     - os: osx
       rust: stable
       env: TARGET=x86_64-apple-darwin
@@ -43,15 +43,12 @@ addons:
 
 env:
   global:
-    # Default target on travis-ci.
-    # Used as conditional check in the install stage
-    - HOST=x86_64-unknown-linux-gnu
-    # Used on the deployment script
     - PROJECT_NAME=git-find
+    - LIBZ_SYS_STATIC=1
 
 install:
   # prevent target re-add error from rustup
-  - if [[ $TRAVIS_OS_NAME = linux && $HOST != $TARGET ]]; then rustup target add $TARGET; fi
+  - if [[ $TRAVIS_OS_NAME = linux ]]; then rustup target add $TARGET; fi
 
 script:
   # Incorporate TARGET env var to the build and test process
