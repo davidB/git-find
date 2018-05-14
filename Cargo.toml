@@ -1,6 +1,6 @@
 [package]
 name = "git-find"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["David Bernard <david.bernard.31@gmail.com>"]
 description = "A tool (cli & lib) to find local git repositories."
 readme = "README.md"
