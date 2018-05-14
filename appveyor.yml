@@ -5,14 +5,14 @@ environment:
     PROJECT_NAME: git-find
   matrix:
     # Stable channel
-    - TARGET: i686-pc-windows-gnu
-      MSYS_BITS: 32
-      CHANNEL: stable
+    # - TARGET: i686-pc-windows-gnu
+    #   MSYS_BITS: 32
+    #   CHANNEL: stable
     - TARGET: i686-pc-windows-msvc
       CHANNEL: stable
-    - TARGET: x86_64-pc-windows-gnu
-      MSYS_BITS: 64
-      CHANNEL: stable
+    # - TARGET: x86_64-pc-windows-gnu
+    #   MSYS_BITS: 64
+    #   CHANNEL: stable
     - TARGET: x86_64-pc-windows-msvc
       CHANNEL: stable
       VCPKG_DEFAULT_TRIPLET: x64-windows-static
