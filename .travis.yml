@@ -22,15 +22,8 @@ matrix:
     - os: osx
       rust: stable
       env: TARGET=x86_64-apple-darwin
-    # Code formatting check
-    - os: linux
-      rust: nightly
-      # skip the global install step
-      install:
-        - cargo install --debug --force rustfmt-nightly
-      script: cargo fmt -- --write-mode=diff
-  allow_failures:
-    - rust: nightly
+  # allow_failures:
+  #   - rust: nightly
   fast_finish: true
 
 addons:
@@ -53,11 +46,16 @@ env:
 install:
   # prevent target re-add error from rustup
   - if [[ $TRAVIS_OS_NAME = linux && $HOST != $TARGET ]]; then rustup target add $TARGET; fi
+#   - rustup component add rustfmt-preview
 
-script:
+# # Code formatting check
+# before_script: |
+#   - cargo fmt -- --write-mode=diff
+
+script: |
   # Incorporate TARGET env var to the build and test process
-  - cargo build --target $TARGET --verbose
-  - cargo test --target $TARGET --verbose
+  cargo build --target $TARGET --verbose &&
+  cargo test --target $TARGET --verbose &&
 
 before_deploy:
   - cargo build --target "$TARGET" --release --verbose
