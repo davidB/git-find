@@ -52,15 +52,16 @@ install:
 # before_script: |
 #   - cargo fmt -- --write-mode=diff
 
-script: |
+script:
   # Incorporate TARGET env var to the build and test process
-  cargo build --target $TARGET --verbose &&
-  cargo test --target $TARGET --verbose &&
+  - cargo build --target $TARGET
+  - cargo test --target $TARGET
 
 before_deploy:
-  - cargo build --target "$TARGET" --release --verbose
-  - strip 
+  - cargo build --target "$TARGET" --release
+  - strip target/release/${PROJECT_NAME}
   - tar -czvf  "${PROJECT_NAME}_${TRAVIS_TAG}-${TARGET}.tar.gz" target/release/${PROJECT_NAME}
+
 deploy:
   provider: releases
   api_key:
