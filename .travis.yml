@@ -43,12 +43,16 @@ addons:
 
 env:
   global:
+    # Default target on travis-ci.
+    # Used as conditional check in the install stage
+    - HOST=x86_64-unknown-linux-gnu
+    # Used on the deployment script
     - PROJECT_NAME=git-find
     - LIBZ_SYS_STATIC=1
 
 install:
   # prevent target re-add error from rustup
-  - if [[ $TRAVIS_OS_NAME = linux ]]; then rustup target add $TARGET; fi
+  - if [[ $TRAVIS_OS_NAME = linux && $HOST != $TARGET ]]; then rustup target add $TARGET; fi
 
 script:
   # Incorporate TARGET env var to the build and test process
