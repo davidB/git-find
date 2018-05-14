@@ -48,8 +48,8 @@ before_deploy:
   # Generate artifacts for release
   - cargo build --release --target %TARGET%
   - mkdir staging
-  - copy target\release\%PROJECT_NAME%.exe staging
-  - ps: copy target\release\build\git-find*\out\_git-find.ps1 staging
+  - copy target\%TARGET%\release\%PROJECT_NAME%.exe staging
+  - ps: copy target\%TARGET%\release\build\git-find*\out\_git-find.ps1 staging
   - cd staging
     # release zipfile will look like 'rust-everywhere-v1.2.3-x86_64-pc-windows-msvc'
   - 7z a ../%PROJECT_NAME%-%APPVEYOR_REPO_TAG_NAME%-%TARGET%.zip *
