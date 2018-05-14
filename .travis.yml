@@ -59,8 +59,8 @@ script:
 
 before_deploy:
   - cargo build --target "$TARGET" --release
-  - strip target/release/${PROJECT_NAME}
-  - tar -czvf  "${PROJECT_NAME}_${TRAVIS_TAG}-${TARGET}.tar.gz" target/release/${PROJECT_NAME}
+  - strip target/${TARGET}/release/${PROJECT_NAME}
+  - tar -czvf  "${PROJECT_NAME}_${TRAVIS_TAG}-${TARGET}.tar.gz" target/${TARGET}/release/${PROJECT_NAME}
 
 deploy:
   provider: releases
