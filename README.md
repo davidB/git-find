@@ -137,7 +137,7 @@ Note that rust version *1.26.0* or later is required.
 
 *!! Experimental !!*
 
-The [release page](https://github.com/sharkdp/git-find/releases) includes precompiled binaries for Linux, macOS and Windows.
+The [release page](https://github.com/davidb/git-find/releases) includes precompiled binaries for Linux, macOS and Windows.
 
 * download archives for your OS
 * unarchive it, and move the executable into the PATH
