@@ -12,6 +12,8 @@ extern crate walkdir;
 #[macro_use]
 extern crate spectral;
 
+use gtmpl::Func;
+use gtmpl::Value;
 use regex::Regex;
 use std::collections::HashMap;
 use std::path::Path;
@@ -22,10 +24,11 @@ pub struct Ctx {
     pub logger: slog::Logger,
 }
 
-#[derive(Debug, Clone, Gtmpl)]
+#[derive(Clone, Gtmpl)]
 pub struct GitRepo {
     path: Location,
-    remotes: HashMap<String, RemoteData>,
+    //repo: git2::Repository
+    remotes: Func,
 }
 
 #[derive(Debug, Clone, Gtmpl)]
@@ -42,26 +45,43 @@ pub struct RemoteData {
     url_path: String,
 }
 
+fn find_remotes(args: &[Value]) -> Result<Value, String> {
+    if let Value::Object(ref o) = &args[0] {
+        let full = o.get("path")
+            .and_then(|v| {
+                if let Value::Object(ref o) = v {
+                    o.get("full").map(|s| s.to_string())
+                } else {
+                    None
+                }
+            })
+            .ok_or("path.full not empty")?;
+        let mut remotes = HashMap::new();
+        let repo = git2::Repository::open(Path::new(&full)).unwrap();
+        repo.remotes()
+                .unwrap()
+                .iter()
+                .filter_map(|x| {
+                    x.and_then(|name| {
+                        repo.find_remote(name)
+                            .map(|remote| RemoteData::from(remote))
+                            .ok()
+                    })
+                })
+                //.collect::<Vec<_>>()
+                //.into_iter()
+                .for_each(|rd| {
+                    remotes.insert(rd.name.clone(), rd);
+                });
+        Ok(remotes.into())
+    } else {
+        Err(format!("GitRepo required, got: {:?}", args))
+    }
+}
+
 impl<'a> From<&'a Path> for GitRepo {
     //TODO manage result & error
     fn from(path: &Path) -> Self {
-        let mut remotes = HashMap::new();
-        let repo = git2::Repository::open(path).unwrap();
-        repo.remotes()
-            .unwrap()
-            .iter()
-            .filter_map(|x| {
-                x.and_then(|name| {
-                    repo.find_remote(name)
-                        .map(|remote| RemoteData::from(remote))
-                        .ok()
-                })
-            })
-            //.collect::<Vec<_>>()
-            //.into_iter()
-            .for_each(|rd| {
-                remotes.insert(rd.name.clone(), rd);
-            });
         GitRepo {
             path: Location {
                 full: path.to_str().map(|x| x.to_owned()).unwrap(),
@@ -70,7 +90,7 @@ impl<'a> From<&'a Path> for GitRepo {
                     .map(|x| x.to_owned())
                     .unwrap(),
             },
-            remotes,
+            remotes: find_remotes,
         }
     }
 }

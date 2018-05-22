@@ -1,6 +1,6 @@
 [package]
 name = "git-find"
-version = "0.3.2"
+version = "0.4.0"
 authors = ["David Bernard <david.bernard.31@gmail.com>"]
 description = "A tool (cli & lib) to find local git repositories."
 readme = "README.md"
@@ -27,6 +27,7 @@ gtmpl_value= "^0.3"
 structopt = "0.2"
 git2 = { version = "^0.7", features = [], default-features = false }
 regex = "1.0.0"
+failure = ""
 
 [dev-dependencies]
 spectral = "0.6.0"
