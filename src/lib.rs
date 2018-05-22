@@ -154,6 +154,7 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
 }
 
 pub fn render(ctx: &Ctx, tmpl: &str, value: &GitRepo) -> String {
+    trace!(ctx.logger, "render");
     //TODO remove the clone() and provide Value for &GitRepo
     gtmpl::template(tmpl, value.clone()).expect("template")
 }
