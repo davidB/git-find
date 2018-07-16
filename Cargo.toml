@@ -27,7 +27,6 @@ gtmpl_value= "^0.3"
 structopt = "0.2"
 git2 = { version = "^0.7", features = [], default-features = false }
 regex = "1.0.1"
-failure = ""
 
 [dev-dependencies]
 spectral = "0.6.0"

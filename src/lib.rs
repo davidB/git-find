@@ -12,6 +12,7 @@ extern crate walkdir;
 #[macro_use]
 extern crate spectral;
 
+use git2::{Remote, Repository, Status, StatusOptions};
 use gtmpl::Func;
 use gtmpl::Value;
 use regex::Regex;
@@ -27,8 +28,9 @@ pub struct Ctx {
 #[derive(Clone, Gtmpl)]
 pub struct GitRepo {
     path: Location,
-    //repo: git2::Repository
+    //repo: git2::Repository,
     remotes: Func,
+    working_paths: Func,
 }
 
 #[derive(Debug, Clone, Gtmpl)]
@@ -45,7 +47,17 @@ pub struct RemoteData {
     url_path: String,
 }
 
-fn find_remotes(args: &[Value]) -> Result<Value, String> {
+#[derive(Debug, Clone, Gtmpl)]
+pub struct WorkingPaths {
+    untracked: Vec<String>,
+    modified: Vec<String>,
+    deleted: Vec<String>,
+    added: Vec<String>,
+    renamed: Vec<String>,
+    conflicted: Vec<String>,
+}
+
+fn find_repo(args: &[Value]) -> Result<Repository, String> {
     if let Value::Object(ref o) = &args[0] {
         let full = o.get("path")
             .and_then(|v| {
@@ -56,29 +68,79 @@ fn find_remotes(args: &[Value]) -> Result<Value, String> {
                 }
             })
             .ok_or("path.full not empty")?;
-        let mut remotes = HashMap::new();
-        let repo = git2::Repository::open(Path::new(&full)).unwrap();
-        repo.remotes()
-                .unwrap()
-                .iter()
-                .filter_map(|x| {
-                    x.and_then(|name| {
-                        repo.find_remote(name)
-                            .map(|remote| RemoteData::from(remote))
-                            .ok()
-                    })
-                })
-                //.collect::<Vec<_>>()
-                //.into_iter()
-                .for_each(|rd| {
-                    remotes.insert(rd.name.clone(), rd);
-                });
-        Ok(remotes.into())
+        let repo = Repository::open(Path::new(&full)).unwrap();
+        Ok(repo)
     } else {
         Err(format!("GitRepo required, got: {:?}", args))
     }
 }
 
+fn find_remotes(args: &[Value]) -> Result<Value, String> {
+    let repo = find_repo(args)?;
+    let mut remotes = HashMap::new();
+    repo.remotes()
+        .unwrap()
+        .iter()
+        .filter_map(|x| {
+            x.and_then(|name| {
+                repo.find_remote(name)
+                    .map(|remote| RemoteData::from(remote))
+                    .ok()
+            })
+        })
+        //.collect::<Vec<_>>()
+        //.into_iter()
+        .for_each(|rd| {
+            remotes.insert(rd.name.clone(), rd);
+        });
+    Ok(remotes.into())
+}
+
+fn find_working_paths(args: &[Value]) -> Result<Value, String> {
+    let repo = find_repo(args)?;
+    let mut opts = StatusOptions::new();
+    opts.include_untracked(true);
+    let statuses = repo.statuses(Some(&mut opts))
+        .map_err(|e| format!("{}", e))?;
+    let mut untracked = vec![];
+    let mut modified = vec![];
+    let mut added = vec![];
+    let mut deleted = vec![];
+    let mut renamed = vec![];
+    let mut conflicted = vec![];
+    for entry in statuses.iter() {
+        if let Some(path) = entry.path() {
+            //eprintln!("path : {} {:?}", path, entry.status());
+            let status = entry.status();
+            if status.intersects(Status::INDEX_MODIFIED) || status.intersects(Status::WT_MODIFIED) {
+                modified.push(path.to_owned());
+            }
+            if status.intersects(Status::INDEX_NEW) {
+                added.push(path.to_owned())
+            }
+            if status.intersects(Status::WT_NEW) {
+                untracked.push(path.to_owned())
+            }
+            if status.intersects(Status::INDEX_DELETED) || status.intersects(Status::WT_DELETED) {
+                deleted.push(path.to_owned())
+            }
+            if status.intersects(Status::INDEX_RENAMED) || status.intersects(Status::WT_RENAMED) {
+                renamed.push(path.to_owned())
+            }
+            if status.intersects(Status::CONFLICTED) {
+                conflicted.push(path.to_owned())
+            }
+        }
+    }
+    Ok(WorkingPaths {
+        untracked,
+        modified,
+        added,
+        deleted,
+        renamed,
+        conflicted,
+    }.into())
+}
 impl<'a> From<&'a Path> for GitRepo {
     //TODO manage result & error
     fn from(path: &Path) -> Self {
@@ -91,12 +153,13 @@ impl<'a> From<&'a Path> for GitRepo {
                     .unwrap(),
             },
             remotes: find_remotes,
+            working_paths: find_working_paths,
         }
     }
 }
 
-impl<'b> From<git2::Remote<'b>> for RemoteData {
-    fn from(v: git2::Remote) -> Self {
+impl<'b> From<Remote<'b>> for RemoteData {
+    fn from(v: Remote) -> Self {
         // let host = url_parsed.host_str().unwrap_or("").to_owned();
         // let path = url_parsed.path().to_owned();
         let (host, path) = v.url()
