@@ -97,7 +97,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "git-find"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "git2 0.7.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
