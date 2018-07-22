@@ -60,7 +60,7 @@ ARGS:
 * broadcast `git status` to every repositories
 
 ```sh
-git find -t 'cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$PWD"; git status' | sh
+git find -t 'cd {{ .path.full }}; echo "\n\n----\n$PWD"; git status' | sh
 ````
 
 ### <a name='Templateformat'></a>Template format
@@ -80,6 +80,28 @@ The template format is a subset of [golang text/template](https://golang.org/pkg
     * .url_full
     * .url_host
     * .url_path
+* .working_paths}}
+  * .conflicted : list of path as string
+  * .modified : list of path as string
+  * .added : list of path as string
+  * .deleted : list of path as string
+  * .renamed : list of path as string
+  * .untracked : list of path as string
+
+#### <a name='Samples'></a>For scripting
+
+1. Use explicit template within your script (the default template could change with each release)
+1. If the template is a shell script (the tips could be used with every interpreter: python, ruby, ...), then you can
+```sh
+# run it directly
+git find -t '...' | sh
+
+# generate a script and run it later (maybe after review)
+git find -t '...' > myscript.sh
+sh myscript.sh
+
+```
+
 
 #### <a name='Samples'></a>Samples
 
@@ -105,20 +127,27 @@ cd {{ .path.full }}; echo "\n\n---------------------------------------------\n$P
 
 ```tmpl
 echo "\n\n---------------------------------------------\n"
-PRJ_SRC={{ .path.full }}
-{{with .remotes.origin}}
-PRJ_DST=$HOME/src/{{ .url_host }}/{{ .url_path}}
-if [ ! -d $PRJ_DST ] ; then
+PRJ_SRC="{{ .path.full }}"
+{{if .remotes.origin}}
+PRJ_DST="$HOME/src/{{ .remotes.origin.url_host }}/{{ .remotes.origin.url_path}}"
+{{else}}
+PRJ_DST=$HOME/src/_local_/{{ .path.file_name}}
+{{end}}
+if [ ! -d "$PRJ_DST" ] ; then
   read -p "move $PRJ_SRC to $PRJ_DST ?" answer
   case $answer in
     [yY]* )
-        mkdir -p $(dirname $PRJ_DST)
-        mv $PRJ_SRC $PRJ_DST
+        mkdir -p $(dirname "$PRJ_DST")
+        mv "$PRJ_SRC" "$PRJ_DST"
         ;;
     * ) ;;
   esac
 fi
-{{end}}
+```
+* to list repo with some info (the default template of version 0.4.1)
+
+```tmpl
+{{with .working_paths}}{{if .conflicted}}C{{else}} {{end}}{{if .modified}}M{{else}}{{if .added}}M{{else}}{{if .deleted}}M{{else}}{{if .renamed}}M{{else}} {{end}}{{end}}{{end}}{{end}}{{if .untracked}}U{{else}} {{end}}{{end}}\t{{ .path.file_name }}\t{{ .path.full }}\t{{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}
 ```
 
 ## <a name='Install'></a>Install
