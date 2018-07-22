@@ -38,7 +38,7 @@ Because I need a tool to list and to reorg my local git repositories.
 
 ```sh
 $> git find -h
-git-find 0.3.2
+git-find 0.4.1
 davidB
 A tool (cli & lib) to find local git repositories.
 
@@ -51,18 +51,47 @@ FLAGS:
     -v, --verbose    Verbose mode (-v, -vv, -vvv, etc.) print on stderr
 
 OPTIONS:
-    -t, --tmpl <format>    format of the output print on stdout [default: {{ .path.file_name }} {{ .path.full }}
-                           {{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}]
+    -t, --tmpl <format>    format of the output print on stdout [default: {{with .working_paths}}{{if
+                           .conflicted}}C{{else}} {{end}}{{if .modified}}M{{else}}{{if .added}}M{{else}}{{if
+                           .deleted}}M{{else}}{{if .renamed}}M{{else}} {{end}}{{end}}{{end}}{{end}}{{if
+                           .untracked}}U{{else}} {{end}}{{end}} {{ .path.file_name }}   {{ .path.full }}        {{with
+                           .remotes.origin}} {{ .name }} {{.url_full}} {{end}}]
 
 ARGS:
     <DIR>    root directory of the search [default: .]
 ```
 
+* sample output with default template (M : Modification uncommitted, U: Untracked)
+
+```sh
+$> git-find .       
+        sbt-scalabuff   /home/dwayne/src/github.com/sbt/sbt-scalabuff    origin https://github.com/sbt/sbt-scalabuff.git 
+ MU     ML      /home/dwayne/src/github.com/samynk/ML    origin https://github.com/samynk/ML.git 
+        BlenderSourceTools      /home/dwayne/src/github.com/Artfunkel/BlenderSourceTools         origin git@github.com:Artfunkel/BlenderSourceTools.git 
+        three.js        /home/dwayne/src/github.com/mrdoob/three.js      origin git@github.com:mrdoob/three.js.git 
+ MU     Yadef   /home/dwayne/src/github.com/zzuegg/Yadef         origin git@github.com:zzuegg/Yadef.git 
+ MU     dmonkey /home/dwayne/src/github.com/kwando/dmonkey       origin https://github.com/kwando/dmonkey.git 
+ MU     getdown /home/dwayne/src/github.com/threerings/getdown   origin https://github.com/threerings/getdown.git 
+        dart-protoc-plugin      /home/dwayne/src/github.com/dart-lang/dart-protoc-plugin         origin git@github.com:dart-lang/dart-protoc-plugin.git 
+ M      vdrones /home/dwayne/src/github.com/davidB/vdrones       origin git@github.com:davidB/vdrones.git 
+        shader_editor   /home/dwayne/src/github.com/davidB/shader_editor         origin git@github.com:davidB/shader_editor.git 
+        scala-maven-plugin      /home/dwayne/src/github.com/davidB/scala-maven-plugin    origin git@github.com:davidB/scala-maven-plugin.git 
+        simpleaudio     /home/dwayne/src/github.com/davidB/simpleaudio   origin git@github.com:davidB/simpleaudio.git 
+ MU     ld31_p0cm0n     /home/dwayne/src/github.com/davidB/ld31_p0cm0n   origin git@github.com:davidB/ld31_p0cm0n.git 
+        livereload-jvm  /home/dwayne/src/github.com/davidB/livereload-jvm        origin git@github.com:davidB/livereload-jvm.git 
+        dart-protobuf   /home/dwayne/src/github.com/davidB/dart-protobuf         origin git@github.com:davidB/dart-protobuf.git 
+  U     jme3_skel       /home/dwayne/src/github.com/davidB/jme3_skel     origin git@github.com:davidB/jme3_skel.git 
+        asset_pack      /home/dwayne/src/github.com/davidB/asset_pack    origin git@github.com:davidB/asset_pack.git 
+        git-find        /home/dwayne/src/github.com/davidB/git-find      origin git@github.com:davidB/git-find.git 
+        jme3_ext_assettools     /home/dwayne/src/github.com/davidB/jme3_ext_assettools   origin git@github.com:davidB/jme3_ext_assettools.git 
+        ...
+```
 * broadcast `git status` to every repositories
 
 ```sh
 git find -t 'cd {{ .path.full }}; echo "\n\n----\n$PWD"; git status' | sh
 ````
+
 
 ### <a name='Templateformat'></a>Template format
 
@@ -81,13 +110,13 @@ The template format is a subset of [golang text/template](https://golang.org/pkg
     * .url_full
     * .url_host
     * .url_path
-* .working_paths}}
-  * .conflicted : list of path as string
-  * .modified : list of path as string
-  * .added : list of path as string
-  * .deleted : list of path as string
-  * .renamed : list of path as string
-  * .untracked : list of path as string
+* .working_paths
+  * .conflicted : list of path
+  * .modified : list of path
+  * .added : list of path
+  * .deleted : list of path
+  * .renamed : list of path
+  * .untracked : list of path
 
 #### <a name='Forscripting'></a>For scripting
 
