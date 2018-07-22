@@ -13,6 +13,7 @@ A tool (cli & lib) to find local git repositories.
 * [Usage Cli](#UsageCli)
 	* [Template format](#Templateformat)
 		* [Possibles values](#Possiblesvalues)
+		* [For scripting](#Forscripting)
 		* [Samples](#Samples)
 * [Install](#Install)
 	* [From cargo](#Fromcargo)
@@ -88,7 +89,7 @@ The template format is a subset of [golang text/template](https://golang.org/pkg
   * .renamed : list of path as string
   * .untracked : list of path as string
 
-#### <a name='Samples'></a>For scripting
+#### <a name='Forscripting'></a>For scripting
 
 1. Use explicit template within your script (the default template could change with each release)
 1. If the template is a shell script (the tips could be used with every interpreter: python, ruby, ...), then you can
