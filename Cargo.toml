@@ -20,7 +20,7 @@ repository = "davidB/git-find"
 slog = { version= "2.3.2", features = ["max_level_trace", "release_max_level_warn"] }
 slog-async = "2.3.0"
 slog-term = "2.4.0"
-walkdir = "2.2.2"
+walkdir = "2.2.5"
 gtmpl = "0.5.2"
 gtmpl_derive = "0.3.1"
 gtmpl_value= "0.3.1"
