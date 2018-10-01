@@ -102,7 +102,7 @@ dependencies = [
  "git2 0.7.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_derive 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "gtmpl_value 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "kernel32-sys 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.2.41 (registry+https://github.com/rust-lang/crates.io-index)",
  "regex 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -132,7 +132,7 @@ name = "gtmpl"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gtmpl_value 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "itertools 0.7.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "percent-encoding 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -143,14 +143,14 @@ name = "gtmpl_derive"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gtmpl_value 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "quote 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "syn 0.12.15 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "gtmpl_value"
-version = "0.3.1"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -655,7 +655,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum git2 0.7.5 (registry+https://github.com/rust-lang/crates.io-index)" = "591f8be1674b421644b6c030969520bc3fa12114d2eb467471982ed3e9584e71"
 "checksum gtmpl 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "b2ec02b685af260ee921dd626b4b87513d00a104f778c9c58ea910cb0e9e2627"
 "checksum gtmpl_derive 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0778ca216071eca1e7b88f5a4c5be58cb69ecea8b306aa62a082cc0ae665a919"
-"checksum gtmpl_value 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "98dd24decbe012500f83e4ac196a1b345693f2eebdaa520793f05b8aa4b23114"
+"checksum gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
 "checksum idna 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = "014b298351066f1512874135335d62a789ffe78a9974f94b43ed5621951eaf7d"
 "checksum isatty 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)" = "a118a53ba42790ef25c82bb481ecf36e2da892646cccd361e69a6bb881e19398"
 "checksum itertools 0.7.8 (registry+https://github.com/rust-lang/crates.io-index)" = "f58856976b776fedd95533137617a02fb25719f40e7d9b01c7043cd65474f450"
