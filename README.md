@@ -241,6 +241,8 @@ But not the same features, else no need to re-do.
 * [mu-repo](http://fabioz.github.io/mu-repo/), Tool to help working with multiple git repositories (short for Multiple Repositories).
 * [mr](http://myrepos.branchable.com/) which is a tool to manage all your version control repositories.
 * [Repo command reference  |  Android Open Source Project](https://source.android.com/setup/develop/repo)
+* [jiri - Git at Google](https://fuchsia.googlesource.com/jiri/)
+* [mateodelnorte/meta](https://github.com/mateodelnorte/meta) tool for turning many repos into a meta repo. why choose many repos or a monolithic repo, when you can have both with a meta repo?
 
 ## <a name='TODO'></a>TODO
 
