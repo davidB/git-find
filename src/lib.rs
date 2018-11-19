@@ -9,7 +9,6 @@ extern crate regex;
 extern crate walkdir;
 
 #[cfg(test)]
-#[macro_use]
 extern crate spectral;
 
 use git2::{Remote, Repository, Status, StatusOptions};
@@ -59,15 +58,15 @@ pub struct WorkingPaths {
 
 fn find_repo(args: &[Value]) -> Result<Repository, String> {
     if let Value::Object(ref o) = &args[0] {
-        let full = o.get("path")
+        let full = o
+            .get("path")
             .and_then(|v| {
                 if let Value::Object(ref o) = v {
                     o.get("full").map(|s| s.to_string())
                 } else {
                     None
                 }
-            })
-            .ok_or("path.full not empty")?;
+            }).ok_or("path.full not empty")?;
         let repo = Repository::open(Path::new(&full)).unwrap();
         Ok(repo)
     } else {
@@ -100,7 +99,8 @@ fn find_working_paths(args: &[Value]) -> Result<Value, String> {
     let repo = find_repo(args)?;
     let mut opts = StatusOptions::new();
     opts.include_untracked(true);
-    let statuses = repo.statuses(Some(&mut opts))
+    let statuses = repo
+        .statuses(Some(&mut opts))
         .map_err(|e| format!("{}", e))?;
     let mut untracked = vec![];
     let mut modified = vec![];
@@ -147,7 +147,8 @@ impl<'a> From<&'a Path> for GitRepo {
         GitRepo {
             path: Location {
                 full: path.to_str().map(|x| x.to_owned()).unwrap(),
-                file_name: path.file_name()
+                file_name: path
+                    .file_name()
                     .and_then(|x| x.to_str())
                     .map(|x| x.to_owned())
                     .unwrap(),
@@ -162,7 +163,8 @@ impl<'b> From<Remote<'b>> for RemoteData {
     fn from(v: Remote) -> Self {
         // let host = url_parsed.host_str().unwrap_or("").to_owned();
         // let path = url_parsed.path().to_owned();
-        let (host, path) = v.url()
+        let (host, path) = v
+            .url()
             .map(|url| extract_host_and_path(url))
             .unwrap_or((None, None));
         RemoteData {
