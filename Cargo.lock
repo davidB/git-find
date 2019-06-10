@@ -93,7 +93,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "git-find"
 version = "0.4.1"
 dependencies = [
- "git2 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "git2 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -111,7 +111,7 @@ dependencies = [
 
 [[package]]
 name = "git2"
-version = "0.9.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "bitflags 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -638,7 +638,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum either 1.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "3be565ca5c557d7f59e7cfcf1844f9e3033650c929c6566f511e8005f205c1d0"
 "checksum fuchsia-zircon 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "2e9763c69ebaae630ba35f74888db465e49e259ba1bc0eda7d06f4a067615d82"
 "checksum fuchsia-zircon-sys 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "3dcaa9ae7725d12cdb85b3ad99a434db70b468c09ded17e012d86b5c1010f7a7"
-"checksum git2 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = "07021feb7dd1b8696d4285dc4146ab990fd2c63daf268749796942a57fa713f7"
+"checksum git2 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)" = "924b2e7d2986e625dcad89e8a429a7b3adee3c3d71e585f4a66c4f7e78715e31"
 "checksum gtmpl 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)" = "2dd34107b19afe784797100ad4ece4828c36fd9c20a835fd4844d404db972808"
 "checksum gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "393950c5da76638d602cba19caf0d3d1086cb59c7260f7e0a7f436d62047209f"
 "checksum gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
