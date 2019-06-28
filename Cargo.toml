@@ -24,7 +24,7 @@ walkdir = "2.2.8"
 gtmpl = "0.5.6"
 gtmpl_derive = "0.3.3"
 gtmpl_value= "0.3.3"
-structopt = "0.2.17"
+structopt = "0.2.18"
 git2 = { version = "0.9.0", features = [], default-features = false }
 regex = "1.1.7"
 
