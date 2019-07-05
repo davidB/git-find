@@ -26,7 +26,7 @@ gtmpl_derive = "0.3.3"
 gtmpl_value= "0.3.3"
 structopt = "0.2.18"
 git2 = { version = "0.9.0", features = [], default-features = false }
-regex = "1.1.7"
+regex = "1.1.8"
 
 [dev-dependencies]
 spectral = "0.6.0"
