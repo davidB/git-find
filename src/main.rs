@@ -11,10 +11,11 @@ use slog::Drain;
 //use std::env;
 use std::fs;
 use std::path::PathBuf;
+use structopt::clap::AppSettings;
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
-#[structopt(raw(setting = "structopt::clap::AppSettings::ColoredHelp"), author = "davidB")]
+#[structopt(setting(AppSettings::ColoredHelp), author = "davidB")]
 struct Cmd {
     // The number of occurences of the `v/verbose` flag
     /// Verbose mode (-v, -vv, -vvv, etc.)
