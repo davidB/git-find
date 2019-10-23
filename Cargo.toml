@@ -9,6 +9,7 @@ keywords = ["git", "find", "search"]
 categories = ["command-line-utilities", "development-tools"]
 repository = "https://github.com/davidB/git-find"
 homepage = "https://github.com/davidB/git-find"
+edition = "2018"
 
 [badges.appveyor]
 repository = "davidB/git-find"
