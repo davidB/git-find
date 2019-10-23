@@ -1,18 +1,11 @@
-extern crate git_find;
-#[macro_use]
-extern crate slog;
-extern crate slog_async;
-extern crate slog_term;
-#[macro_use]
-extern crate structopt;
-
-use git_find::*;
-use slog::Drain;
-//use std::env;
 use std::fs;
 use std::path::PathBuf;
+
+use slog::{debug, info, o, trace, Drain};
 use structopt::clap::AppSettings;
 use structopt::StructOpt;
+
+use git_find::*;
 
 #[derive(StructOpt, Debug)]
 #[structopt(setting(AppSettings::ColoredHelp), author = "davidB")]

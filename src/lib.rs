@@ -1,22 +1,11 @@
-#[macro_use]
-pub extern crate slog;
-extern crate gtmpl;
-#[macro_use]
-extern crate gtmpl_derive;
-extern crate git2;
-extern crate gtmpl_value;
-extern crate regex;
-extern crate walkdir;
-
-#[cfg(test)]
-extern crate spectral;
+use std::path::Path;
 
 use git2::{Remote, Repository, Status, StatusOptions};
-use gtmpl::Func;
-use gtmpl::Value;
+use gtmpl::{self, Func, Value};
+use gtmpl_derive::Gtmpl;
 use regex::Regex;
+use slog::{info, trace, warn};
 use std::collections::HashMap;
-use std::path::Path;
 use walkdir::DirEntry;
 use walkdir::WalkDir;
 
@@ -66,7 +55,8 @@ fn find_repo(args: &[Value]) -> Result<Repository, String> {
                 } else {
                     None
                 }
-            }).ok_or("path.full not empty")?;
+            })
+            .ok_or("path.full not empty")?;
         let repo = Repository::open(Path::new(&full)).unwrap();
         Ok(repo)
     } else {
@@ -80,15 +70,7 @@ fn find_remotes(args: &[Value]) -> Result<Value, String> {
     repo.remotes()
         .unwrap()
         .iter()
-        .filter_map(|x| {
-            x.and_then(|name| {
-                repo.find_remote(name)
-                    .map(|remote| RemoteData::from(remote))
-                    .ok()
-            })
-        })
-        //.collect::<Vec<_>>()
-        //.into_iter()
+        .filter_map(|x| x.and_then(|name| repo.find_remote(name).map(RemoteData::from).ok()))
         .for_each(|rd| {
             remotes.insert(rd.name.clone(), rd);
         });
@@ -139,7 +121,8 @@ fn find_working_paths(args: &[Value]) -> Result<Value, String> {
         deleted,
         renamed,
         conflicted,
-    }.into())
+    }
+    .into())
 }
 impl<'a> From<&'a Path> for GitRepo {
     //TODO manage result & error
@@ -170,8 +153,8 @@ impl<'b> From<Remote<'b>> for RemoteData {
         RemoteData {
             name: v.name().unwrap_or("no_name").to_owned(),
             url_full: v.url().unwrap_or("").to_owned(),
-            url_host: host.unwrap_or("".to_owned()),
-            url_path: path.unwrap_or("".to_owned()),
+            url_host: host.unwrap_or_else(|| "".to_owned()),
+            url_path: path.unwrap_or_else(|| "".to_owned()),
         }
     }
 }
@@ -180,7 +163,8 @@ impl<'b> From<Remote<'b>> for RemoteData {
 fn extract_host_and_path(v: &str) -> (Option<String>, Option<String>) {
     let http_re = Regex::new(
         r"^https?://(?P<host>[[:alnum:]\._-]+)(:\d+)?/(?P<path>[[:alnum:]\._\-/]+).git$",
-    ).unwrap();
+    )
+    .unwrap();
     let ssh_re =
         Regex::new(r"^git@(?P<host>[[:alnum:]\._-]+):(?P<path>[[:alnum:]\._\-/]+).git$").unwrap();
     ssh_re
@@ -228,7 +212,7 @@ fn is_hidden(entry: &DirEntry) -> bool {
     entry
         .file_name()
         .to_str()
-        .map(|s| s.starts_with("."))
+        .map(|s| s.starts_with('.'))
         .unwrap_or(false)
 }
 
