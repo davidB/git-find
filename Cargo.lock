@@ -217,7 +217,7 @@ name = "git-find"
 version = "0.4.1"
 dependencies = [
  "git2 0.10.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "gtmpl 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gtmpl 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "kernel32-sys 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -246,7 +246,7 @@ dependencies = [
 
 [[package]]
 name = "gtmpl"
-version = "0.5.6"
+version = "0.5.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -886,7 +886,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum fuchsia-cprng 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 "checksum getrandom 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = "473a1265acc8ff1e808cd0a1af8cee3c2ee5200916058a2ca113c29f2d903571"
 "checksum git2 0.10.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7c1af51ea8a906616af45a4ce78eacf25860f7a13ae7bf8a814693f0f4037a26"
-"checksum gtmpl 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)" = "2dd34107b19afe784797100ad4ece4828c36fd9c20a835fd4844d404db972808"
+"checksum gtmpl 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)" = "d8405fdf62797bed53de9d3c0e11bc2714484b615969f1d94f755779c504af15"
 "checksum gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "393950c5da76638d602cba19caf0d3d1086cb59c7260f7e0a7f436d62047209f"
 "checksum gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
 "checksum heck 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "20564e78d53d2bb135c343b3f47714a56af2061f1c928fdb541dc7b9fdd94205"
