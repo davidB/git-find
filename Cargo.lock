@@ -240,7 +240,7 @@ dependencies = [
 name = "git-find"
 version = "0.4.1"
 dependencies = [
- "git2 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "git2 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -258,7 +258,7 @@ dependencies = [
 
 [[package]]
 name = "git2"
-version = "0.13.0"
+version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "bitflags 1.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -953,7 +953,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum failure_derive 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "0bc225b78e0391e4b8683440bf2e63c2deeeb2ce5189eab46e2b68c6d3725d08"
 "checksum fuchsia-cprng 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 "checksum getrandom 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = "473a1265acc8ff1e808cd0a1af8cee3c2ee5200916058a2ca113c29f2d903571"
-"checksum git2 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b7da16ceafe24cedd9ba02c4463a2b506b6493baf4317c79c5acb553134a3c15"
+"checksum git2 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = "ef222034f2069cfc5af01ce423574d3d9a3925bd4052912a14e5bcfd7ca9e47a"
 "checksum gtmpl 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)" = "d8405fdf62797bed53de9d3c0e11bc2714484b615969f1d94f755779c504af15"
 "checksum gtmpl_derive 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "393950c5da76638d602cba19caf0d3d1086cb59c7260f7e0a7f436d62047209f"
 "checksum gtmpl_value 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
