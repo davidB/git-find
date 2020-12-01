@@ -18,7 +18,7 @@ repository = "davidB/git-find"
 repository = "davidB/git-find"
 
 [dependencies]
-slog = { version= "2.5.2", features = ["max_level_trace", "release_max_level_warn"] }
+slog = { version= "2.7.0", features = ["max_level_trace", "release_max_level_warn"] }
 slog-async = "2.5.0"
 slog-term = "2.6.0"
 walkdir = "2.3.1"
