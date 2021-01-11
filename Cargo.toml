@@ -24,7 +24,7 @@ slog-term = "2.6.0"
 walkdir = "2.3.1"
 gtmpl = "0.5.7"
 gtmpl_derive = "0.3.3"
-gtmpl_value= "0.3.3"
+gtmpl_value= "0.4.0"
 structopt = "0.3.21"
 git2 = { version = "0.13.12", features = [], default-features = false }
 regex = "1.4.3"

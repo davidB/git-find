@@ -272,7 +272,7 @@ dependencies = [
  "git2",
  "gtmpl",
  "gtmpl_derive",
- "gtmpl_value",
+ "gtmpl_value 0.4.0",
  "kernel32-sys",
  "libc",
  "regex",
@@ -304,7 +304,7 @@ version = "0.5.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d8405fdf62797bed53de9d3c0e11bc2714484b615969f1d94f755779c504af15"
 dependencies = [
- "gtmpl_value",
+ "gtmpl_value 0.3.3",
  "itertools",
  "lazy_static",
  "percent-encoding 1.0.1",
@@ -316,7 +316,7 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "393950c5da76638d602cba19caf0d3d1086cb59c7260f7e0a7f436d62047209f"
 dependencies = [
- "gtmpl_value",
+ "gtmpl_value 0.3.3",
  "proc-macro2 0.4.30",
  "quote 0.6.13",
  "syn 0.15.44",
@@ -327,6 +327,12 @@ name = "gtmpl_value"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
+
+[[package]]
+name = "gtmpl_value"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8995bd73dd9ff926fdfe2b146e3e571d4b488488844561c9628cf7a736d973de"
 
 [[package]]
 name = "heck"
