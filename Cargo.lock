@@ -272,7 +272,7 @@ dependencies = [
  "git2",
  "gtmpl",
  "gtmpl_derive",
- "gtmpl_value",
+ "gtmpl_value 0.3.3",
  "kernel32-sys",
  "libc",
  "regex",
@@ -300,14 +300,14 @@ dependencies = [
 
 [[package]]
 name = "gtmpl"
-version = "0.5.7"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d8405fdf62797bed53de9d3c0e11bc2714484b615969f1d94f755779c504af15"
+checksum = "f8bc64bdceb2909623131a62d470e809c32f86b8329d82f8d31d9971349cb00a"
 dependencies = [
- "gtmpl_value",
+ "gtmpl_value 0.4.0",
  "itertools",
  "lazy_static",
- "percent-encoding 1.0.1",
+ "percent-encoding",
 ]
 
 [[package]]
@@ -316,7 +316,7 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "393950c5da76638d602cba19caf0d3d1086cb59c7260f7e0a7f436d62047209f"
 dependencies = [
- "gtmpl_value",
+ "gtmpl_value 0.3.3",
  "proc-macro2 0.4.30",
  "quote 0.6.13",
  "syn 0.15.44",
@@ -327,6 +327,12 @@ name = "gtmpl_value"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1993b2a77fb10a996f4421a33deaa78dbac73a7914b9873088567e2556b6842"
+
+[[package]]
+name = "gtmpl_value"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8995bd73dd9ff926fdfe2b146e3e571d4b488488844561c9628cf7a736d973de"
 
 [[package]]
 name = "heck"
@@ -350,9 +356,9 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.7.11"
+version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d47946d458e94a1b7bcabbf6521ea7c037062c81f534615abcad76e84d4970d"
+checksum = "37d572918e350e82412fe766d24b15e6682fb2ed2bbe018280caa810397cb319"
 dependencies = [
  "either",
 ]
@@ -533,12 +539,6 @@ checksum = "bcef43580c035376c0705c42792c294b66974abbfd2789b511784023f71f3273"
 dependencies = [
  "libc",
 ]
-
-[[package]]
-name = "percent-encoding"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31010dd2e1ac33d5b46a5b413495239882813e0369f8ed8a5e266f173602f831"
 
 [[package]]
 name = "percent-encoding"
@@ -949,7 +949,7 @@ checksum = "75b414f6c464c879d7f9babf951f23bc3743fb7313c081b2e6ca719067ea9d61"
 dependencies = [
  "idna",
  "matches",
- "percent-encoding 2.1.0",
+ "percent-encoding",
 ]
 
 [[package]]
