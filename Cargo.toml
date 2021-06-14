@@ -23,7 +23,7 @@ slog-async = "2.6.0"
 slog-term = "2.8.0"
 walkdir = "2.3.2"
 gtmpl = "0.6.0"
-gtmpl_derive = "0.4.0"
+gtmpl_derive = "0.5.0"
 gtmpl_value= "0.4.0"
 structopt = "0.3.21"
 git2 = { version = "0.13.20", features = [], default-features = false }
