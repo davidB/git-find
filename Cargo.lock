@@ -139,12 +139,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "either"
-version = "1.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
-
-[[package]]
 name = "form_urlencoded"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -206,14 +200,15 @@ dependencies = [
 
 [[package]]
 name = "gtmpl"
-version = "0.6.0"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f8bc64bdceb2909623131a62d470e809c32f86b8329d82f8d31d9971349cb00a"
+checksum = "1155260abe7fda8790f287b9f1800e3293f97ac7bd7f5df1c6c3f753773d8760"
 dependencies = [
- "gtmpl_value 0.4.0",
- "itertools",
+ "anyhow",
+ "gtmpl_value 0.5.1",
  "lazy_static",
  "percent-encoding",
+ "thiserror",
 ]
 
 [[package]]
@@ -271,15 +266,6 @@ dependencies = [
  "matches",
  "unicode-bidi",
  "unicode-normalization",
-]
-
-[[package]]
-name = "itertools"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37d572918e350e82412fe766d24b15e6682fb2ed2bbe018280caa810397cb319"
-dependencies = [
- "either",
 ]
 
 [[package]]
