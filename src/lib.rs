@@ -1,7 +1,8 @@
 use std::path::Path;
 
+use anyhow::{anyhow, Context};
 use git2::{Remote, Repository, Status, StatusOptions};
-use gtmpl::{self, Func, Value};
+use gtmpl::{self, Func, FuncError, Value};
 use gtmpl_derive::Gtmpl;
 use regex::Regex;
 use slog::{info, trace, warn};
@@ -45,7 +46,7 @@ pub struct WorkingPaths {
     conflicted: Vec<String>,
 }
 
-fn find_repo(args: &[Value]) -> Result<Repository, String> {
+fn find_repo(args: &[Value]) -> Result<Repository, FuncError> {
     if let Value::Object(ref o) = &args[0] {
         let full = o
             .get("path")
@@ -56,15 +57,15 @@ fn find_repo(args: &[Value]) -> Result<Repository, String> {
                     None
                 }
             })
-            .ok_or("path.full not empty")?;
+            .ok_or(anyhow!("path.full not empty"))?;
         let repo = Repository::open(Path::new(&full)).unwrap();
         Ok(repo)
     } else {
-        Err(format!("GitRepo required, got: {:?}", args))
+        Err(anyhow!("GitRepo required, got: {:?}", args).into())
     }
 }
 
-fn find_remotes(args: &[Value]) -> Result<Value, String> {
+fn find_remotes(args: &[Value]) -> Result<Value, FuncError> {
     let repo = find_repo(args)?;
     let mut remotes = HashMap::new();
     repo.remotes()
@@ -77,13 +78,13 @@ fn find_remotes(args: &[Value]) -> Result<Value, String> {
     Ok(remotes.into())
 }
 
-fn find_working_paths(args: &[Value]) -> Result<Value, String> {
+fn find_working_paths(args: &[Value]) -> Result<Value, FuncError> {
     let repo = find_repo(args)?;
     let mut opts = StatusOptions::new();
     opts.include_untracked(true);
     let statuses = repo
         .statuses(Some(&mut opts))
-        .map_err(|e| format!("{}", e))?;
+        .context("find status of working path")?;
     let mut untracked = vec![];
     let mut modified = vec![];
     let mut added = vec![];
@@ -180,7 +181,7 @@ pub fn find_repos(ctx: &Ctx, root: &Path) -> Vec<GitRepo> {
     let mut it = WalkDir::new(root).into_iter();
     loop {
         let entry = match it.next() {
-            None => break,
+            Option::None => break,
             Some(Err(err)) => {
                 warn!(ctx.logger, "fail to access"; "err" => format!("{:?}", err));
                 continue;

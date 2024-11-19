@@ -18,16 +18,20 @@ repository = "davidB/git-find"
 repository = "davidB/git-find"
 
 [dependencies]
-slog = { version= "2.7.0", features = ["max_level_trace", "release_max_level_warn"] }
+anyhow = "1"
+slog = { version = "2.7.0", features = [
+    "max_level_trace",
+    "release_max_level_warn",
+] }
 slog-async = "2.7.0"
 slog-term = "2.8.0"
 walkdir = "2.3.2"
-gtmpl = "0.6.0"
-gtmpl_derive = "0.5.0"
-gtmpl_value= "0.4.0"
+gtmpl = "0.7"
+gtmpl_derive = "0.5"
+gtmpl_value = "0.5"
 structopt = "0.3.22"
-git2 = { version = "0.15.0", features = [], default-features = false }
-regex = "1.5.4"
+git2 = { version = "0.19", features = [], default-features = false }
+regex = "1.11"
 
 [dev-dependencies]
 spectral = "0.6.0"
@@ -47,5 +51,5 @@ winapi = "0.3"
 [profile.release]
 lto = true
 panic = 'abort'
-opt-level = 'z'  # Optimize for size.
+opt-level = 'z'   # Optimize for size.
 codegen-units = 1
