@@ -32,6 +32,6 @@ jobs:
           toolchain: ${{ matrix.rust_toolchain }}
           override: true
       - uses: davidB/rust-cargo-make@v1
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v4.2.2
       - name: Run tests
         run: cargo make --disable-check-for-updates --profile ${{ matrix.os.profile }} --env TARGET=${{matrix.os.target}} ci-flow
