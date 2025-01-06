@@ -30,7 +30,7 @@ gtmpl = "0.7"
 gtmpl_derive = "0.5"
 gtmpl_value = "0.5"
 structopt = "0.3.22"
-git2 = { version = "0.19", features = [], default-features = false }
+git2 = { version = "0.20", features = [], default-features = false }
 regex = "1.11"
 
 [dev-dependencies]
