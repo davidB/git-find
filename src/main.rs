@@ -1,32 +1,31 @@
 use std::fs;
 use std::path::PathBuf;
 
+use clap::Parser;
 use slog::{debug, info, o, trace, Drain};
-use structopt::clap::AppSettings;
-use structopt::StructOpt;
 
 use git_find::*;
 
-#[derive(StructOpt, Debug)]
-#[structopt(setting(AppSettings::ColoredHelp), author = "davidB")]
+#[derive(Parser, Debug)]
+#[clap(version, about, author = "davidB")]
 struct Cmd {
     // The number of occurences of the `v/verbose` flag
     /// Verbose mode (-v, -vv, -vvv, etc.)
     /// print on stderr
-    #[structopt(short = "v", long = "verbose", parse(from_occurrences))]
+    #[arg(short = 'v', long = "verbose", action = clap::ArgAction::Count)]
     verbose: u8,
 
     /// format of the output
     /// print on stdout
-    #[structopt(
-        short = "t",
+    #[arg(
+        short = 't',
         long = "tmpl",
         default_value = "{{with .working_paths}}{{if .conflicted}}C{{else}} {{end}}{{if .modified}}M{{else}}{{if .added}}M{{else}}{{if .deleted}}M{{else}}{{if .renamed}}M{{else}} {{end}}{{end}}{{end}}{{end}}{{if .untracked}}U{{else}} {{end}}{{end}}\t{{ .path.file_name }}\t{{ .path.full }}\t{{with .remotes.origin}} {{ .name }} {{.url_full}} {{end}}"
     )]
     format: String,
 
     /// root directory of the search
-    #[structopt(name = "DIR", parse(from_os_str), default_value = ".")]
+    #[arg(value_name = "DIR", default_value = ".")]
     dir: PathBuf,
 }
 
@@ -45,8 +44,7 @@ fn init_log(level_min: slog::Level) -> slog::Logger {
 }
 
 fn main() {
-    let cmd = Cmd::from_args();
-
+    let cmd = Cmd::parse();
     let log_level =
         slog::Level::from_usize(3 + cmd.verbose as usize).unwrap_or(slog::Level::Warning);
     let log = init_log(log_level);
